@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Ultron" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">#040B12</item>
+        <item name="android:statusBarColor">#040B12</item>
+        <item name="android:navigationBarColor">#040B12</item>
+        <item name="android:textColorPrimary">#D3F1F9</item>
+    </style>
+</resources>

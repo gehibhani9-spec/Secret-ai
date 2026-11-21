@@ -1,0 +1,33 @@
+name: Build Ultron APK
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+
+      - name: Build debug APK
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ELEVEN_API_KEY: ${{ secrets.ELEVEN_API_KEY }}
+          ELEVEN_VOICE_ID: ${{ secrets.ELEVEN_VOICE_ID }}
+        run: gradle assembleDebug --no-daemon
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ultron-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
